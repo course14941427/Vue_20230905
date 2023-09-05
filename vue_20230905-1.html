@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue</title>
+    <link rel="stylesheet" href="CSS/css_bootstrap.min.css">
+    <link rel="stylesheet" href="CSS/mycss.css">
+</head>
+
+<body>
+    <div id="app">
+        <!-- 1. v-modal綁定 -->
+        <div class="demo">
+            <h2>1. v-model綁定</h2>
+            <input type="text" class="form-control" V-model="mytitle">
+            <p class="h3 mt-3">你輸入的字為: {{ mytitle }}</p>
+            <div V-text="mytitle"></div>
+
+            <!-- V-html盡量別用 -->
+            <div V-html="mytitle"></div>
+        </div>
+
+        <!-- 2. v-bind綁定 -->
+        <div class="demo">
+            <h2>2. V-bind (簡寫 :)</h2>
+            原圖
+            <img V-bind:src="imgSrc01" alt="" class="">
+            <br>
+            W25
+            <img V-bind:src="imgSrc01" alt="" V-bind:class="classW25">
+            <br>
+            W50
+            <img V-bind:src="imgSrc01" alt="" V-bind:class="classW50">
+            <input type="text" class="form-control my-3" V-model="imgSrc01">
+        </div>
+
+        <!-- 3. V-for and V-if -->
+        <div class="demo">
+            <h2>3. V-for and V-if</h2>
+
+            <h2>V-for</h2>
+            <ul class="list-group">
+                <li class="list-group-item" V-for="(item, keyyy) in list">
+                    {{ keyyy+1 }}.{{ item.product }}1斤賣{{ item.price }}元，在{{ item.city }}。
+                </li>
+            </ul>
+            <hr>
+            <h1>先用template V-for 再用 V-if判斷</h1>
+            <h2>V-if < 100 </h2>
+            <ul class="list-group my-3">
+                <template V-for="(item, keyyy) in list">
+                    <li class="list-group-item" V-if="item.price < 100">
+                        {{ keyyy+1 }}.{{ item.product }}1斤賣{{ item.price }}元，在{{ item.city }}。
+                    </li>
+                </template>
+            </ul>
+        
+        <hr>
+
+        <ul class="nav nav-tabs">
+            <li class="nav-item">
+              <a class="nav-link" href="#" V-on:click.prevent="mylink = '草莓'" V-bind:class="{'active' : mylink == '草莓'}">草莓</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#" V-on:click.prevent="mylink = '芭樂'" V-bind:class="{'active' : mylink == '芭樂'}">芭樂</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#" V-on:click.prevent="mylink = '番茄'" V-bind:class="{'active' : mylink == '番茄'}">番茄</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#" V-on:click.prevent="mylink = '櫻桃'" V-bind:class="{'active' : mylink == '櫻桃'}">櫻桃</a>
+            </li>
+
+          </ul>
+          <ul class="list-group my-3">
+            <template V-for="(item, keyyy) in list">
+                <li class="list-group-item" V-if="item.product == mylink">
+                    在{{ item.city }}的{{ item.product }}，1斤賣{{ item.price }}元。
+                </li>
+            </template>
+        </div>
+
+        {{ text01 }}
+        {{ text02 }}
+    </div>
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+
+    <script>
+        const App = {
+            data() {
+                return {
+                    text01: 'hellow world!',
+                    text02: 'hellow world!9898',
+                    mytitle: 'vue 教學示範',
+                    imgSrc01: 'image/chih.jpg',
+                    imgSrc02: 'image/hsia.jpg',
+                    imgSrc03: 'image/kang.jpg',
+                    classW25: 'w-25',
+                    classW50: 'w-50',
+                    mylink: '',
+                    mycity: '',
+                    list: [
+                        {
+                            product: '草莓',
+                            price: 200,
+                            city: '高雄市',
+                        },
+                        {
+                            product: '草莓',
+                            price: 100,
+                            city: '台北市',
+                        },
+                        {
+                            product: '芭樂',
+                            price: 20,
+                            city: '高雄市',
+                        },
+                        {
+                            product: '芭樂',
+                            price: 10,
+                            city: '台北市',
+                        },
+                        {
+                            product: '番茄',
+                            price: 66,
+                            city: '高雄市',
+                        },
+                        {
+                            product: '番茄',
+                            price: 33,
+                            city: '台北市',
+                        },
+                        {
+                            product: '櫻桃',
+                            price: 600,
+                            city: '高雄市',
+                        },
+                        {
+                            product: '櫻桃',
+                            price: 300,
+                            city: '台北市',
+                        },
+                    ]
+
+                }
+            }
+        }
+        Vue.createApp(App).mount('#app')
+    </script>
+
+
+
+
+</body>
+
+</html>
